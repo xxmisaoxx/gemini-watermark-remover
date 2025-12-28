@@ -1,222 +1,251 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <title>Banana Watermark Remover</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xóa Watermark Banana AI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-  <!-- Font hiện đại -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-  <style>
-    :root {
-      --bg: #0f172a;
-      --card: #111827;
-      --border: #1f2937;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --primary: #6366f1;
-      --success: #22c55e;
-    }
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
 
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', system-ui, sans-serif;
-    }
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
 
-    body {
-      margin: 0;
-      background: linear-gradient(135deg, #020617, #020617);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
+        h2 {
+            font-size: 1.8rem;
+            margin: 1.5rem 0 1rem;
+            font-weight: 600;
+        }
 
-    .app {
-      width: 100%;
-      max-width: 980px;
-      background: var(--card);
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.5);
-      border: 1px solid var(--border);
-    }
+        p {
+            opacity: 0.9;
+            max-width: 600px;
+            line-height: 1.6;
+        }
 
-    h1 {
-      margin: 0 0 6px;
-      font-size: 26px;
-      font-weight: 700;
-    }
+        .container {
+            max-width: 900px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
 
-    .subtitle {
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
+        #uploadArea {
+            border: 3px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 2rem;
+        }
 
-    /* Upload area */
-    #uploadArea {
-      position: relative;
-      border: 2px dashed #334155;
-      border-radius: 16px;
-      padding: 36px;
-      text-align: center;
-      cursor: pointer;
-      transition: .25s ease;
-      background: radial-gradient(circle at top, #020617, #020617);
-    }
+        #uploadArea:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
 
-    #uploadArea:hover {
-      border-color: var(--primary);
-      background: #020617;
-    }
+        #fileInput {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
 
-    #uploadArea strong {
-      font-size: 16px;
-      display: block;
-      margin-bottom: 6px;
-    }
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
 
-    #uploadArea span {
-      color: var(--muted);
-      font-size: 14px;
-    }
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
 
-    /* input file phủ toàn vùng */
-    #fileInput {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
-    }
+        .step {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
 
-    /* Preview */
-    #singlePreview {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
 
-    .image-card {
-      background: #020617;
-      border-radius: 14px;
-      padding: 14px;
-      border: 1px solid var(--border);
-    }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
 
-    .image-card h3 {
-      margin: 0 0 10px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--muted);
-    }
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
 
-    .image-box {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #020617;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        .feature h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
 
-    .image-box img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-    }
+        #singlePreview {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 2rem 0;
+        }
 
-    /* Processed section */
-    #processedSection {
-      margin-top: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+        #processedSection {
+            display: none;
+            margin-top: 2rem;
+        }
 
-    #statusMessage {
-      color: var(--muted);
-      font-size: 14px;
-    }
+        #processedImage {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
 
-    #downloadBtn {
-      background: linear-gradient(135deg, var(--primary), #818cf8);
-      border: none;
-      color: white;
-      padding: 12px 22px;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: .2s ease;
-    }
+        #downloadBtn {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem 2.5rem;
+            background: #ffffff;
+            color: #667eea;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-    #downloadBtn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 30px rgba(99,102,241,.35);
-    }
+        #downloadBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
 
-    #downloadBtn:disabled {
-      opacity: .5;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
+        #statusMessage {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            min-height: 1.5em;
+        }
 
-    @media (max-width: 768px) {
-      #singlePreview {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
-
 <body>
-  <div class="app">
-    <h1>Banana Watermark Remover</h1>
-    <div class="subtitle">Xoá watermark ảnh nhanh chóng bằng AI</div>
+    <div class="container">
+        <header>
+            <h1>Xóa Watermark Banana AI</h1>
+            <p>Dựa trên thuật toán đảo ngược Alpha blending, xử lý hoàn toàn cục bộ trong trình duyệt, miễn phí, nhanh chóng, không mất chất lượng</p>
+        </header>
 
-    <!-- Upload -->
-    <div id="uploadArea">
-      <strong>Nhấn để tải ảnh lên</strong>
-      <span>PNG, JPG, JPEG</span>
-      <input type="file" id="fileInput" accept="image/*" />
-    </div>
-
-    <!-- Preview -->
-    <div id="singlePreview">
-      <div class="image-card">
-        <h3>Ảnh gốc</h3>
-        <div class="image-box">
-          <img id="originalImage" />
+        <div id="uploadArea">
+            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp">
+            <span class="upload-icon">📁</span>
+            <h2>Nhấp để chọn hoặc kéo thả ảnh vào đây</h2>
+            <p>Hỗ trợ JPG, PNG, WebP</p>
         </div>
-      </div>
 
-      <div class="image-card">
-        <h3>Ảnh đã xử lý</h3>
-        <div class="image-box">
-          <img id="processedImage" />
+        <div id="statusMessage"></div>
+
+        <img id="singlePreview" src="" alt="Ảnh gốc" style="display:none;">
+
+        <div id="processedSection">
+            <h2>Kết quả sau khi xóa watermark</h2>
+            <img id="processedImage" src="" alt="Ảnh đã xử lý">
+            <br>
+            <button id="downloadBtn">Tải ảnh xuống</button>
         </div>
-      </div>
-    </div>
 
-    <!-- Processed -->
-    <div id="processedSection">
-      <div id="statusMessage">Chưa có ảnh được xử lý</div>
-      <button id="downloadBtn" disabled>Tải ảnh</button>
-    </div>
-  </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <p>Chọn ảnh gốc</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <p>Thuật toán tự động phân tích</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <p>Lưu ảnh không watermark</p>
+            </div>
+        </div>
 
-  <!-- JS gốc giữ nguyên -->
-  <script src="app.js"></script>
+        <div class="features">
+            <div class="feature">
+                <h3>⚡ Xử lý siêu nhanh</h3>
+                <p>Dựa trên công nghệ trình duyệt hiện đại, phản hồi chỉ trong vài mili giây, không cần chờ đợi</p>
+            </div>
+            <div class="feature">
+                <h3>🔒 Bảo mật tuyệt đối</h3>
+                <p>Hoàn toàn chạy phía client, ảnh không rời khỏi máy bạn, không upload lên server</p>
+            </div>
+            <div class="feature">
+                <h3>🆓 Miễn phí hoàn toàn</h3>
+                <p>Không giới hạn lượt dùng, không phí ẩn, dùng ngay lập tức</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Đang xử lý...</p>
+        </footer>
+    </div>
+<scrip src="app.js"></scrip>
+    <!-- Không thay đổi phần script gốc (giả sử có file script riêng hoặc inline gốc) -->
+    <!-- Nếu code gốc có JS inline, hãy giữ nguyên ở đây. Ở đây tôi giữ cấu trúc HTML thuần để tương thích logic JS cũ. -->
 </body>
 </html>
-
