@@ -1,172 +1,265 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xóa Watermark Banana AI</title>
-    <meta name="description" content="Công cụ miễn phí xóa watermark Banana AI, an toàn, riêng tư, 100% chạy trong trình duyệt.">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xóa Watermark Banana AI</title>
+  <meta name="description" content="Công cụ miễn phí xóa watermark Banana AI, an toàn, riêng tư, 100% chạy trong trình duyệt.">
+  <meta name="keywords" content="xóa watermark Banana, remove Banana watermark, Banana AI chỉnh sửa ảnh, Google AI xóa watermark, Banana watermark remover, công cụ xóa watermark miễn phí" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg class='h-10 w-10 text-indigo-500' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l-1.9 5.8-5.8 1.9 5.8 1.9 1.9 5.8 1.9-5.8 5.8-1.9-5.8-1.9z'/%3E%3C/svg%3E">
+ 
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#10B981',
+            'primary-hover': '#059669',
+            dark: '#1F2937',
+            success: '#10B981',
+            warn: '#F59E0B',
+            err: '#EF4444',
+            info: '#3B82F6',
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(16, 185, 129, 0.2)',
+            'card': '0 0 30px rgba(0,0,0,0.1)',
+            'glass': '0 8px 32px rgba(0,0,0,0.15)',
+          },
+          backdropBlur: {
+            xs: '2px',
+          }
         }
-
-        .container {
-            max-width: 900px;
-            width: 90%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        p.description {
-            opacity: 0.9;
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-
-        #uploadArea {
-            border: 3px dashed rgba(255, 255, 255, 0.5);
-            border-radius: 16px;
-            padding: 4rem 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            background: rgba(255, 255, 255, 0.05);
-            margin-bottom: 3rem;
-        }
-
-        #uploadArea:hover {
-            border-color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
-        }
-
-        #uploadArea.dragover {
-            border-color: #ffffff;
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.02);
-        }
-
-        #fileInput {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .upload-icon {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        #uploadArea h2 {
-            font-size: 1.8rem;
-            margin: 0.5rem 0;
-        }
-
-        #singlePreview {
-            max-width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            margin: 2rem 0;
-            display: none;
-        }
-
-        #processedSection {
-            display: none;
-            margin-top: 3rem;
-        }
-
-        #processedImage {
-            max-width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        #downloadBtn {
-            display: none;
-            margin-top: 2rem;
-            padding: 1rem 3rem;
-            background: #ffffff;
-            color: #667eea;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        #downloadBtn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        #statusMessage {
-            font-size: 1.3rem;
-            margin: 1.5rem 0;
-            min-height: 2rem;
-        }
-
-        footer {
-            margin-top: 4rem;
-            opacity: 0.8;
-            font-size: 0.95rem;
-        }
-    </style>
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background: #10B981; border-radius: 4px; }
+    .step-arrow::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 15px solid #F3F4F6;
+      z-index: 10;
+    }
+    @media (min-width: 768px) {
+      .step-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: -24px;
+        top: 0;
+        bottom: 0;
+        width: 24px;
+        background-color: inherit;
+        clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+        z-index: 20;
+      }
+      .step-item:not(:first-child) {
+        clip-path: polygon(0% 0%, 200% 0%, 100% 100%, 0% 100%, 24px 50%);
+      }
+    }
+    body.loading { opacity: 0; }
+    body { transition: opacity 0.5s ease; }
+    .medium-zoom-overlay,
+    .medium-zoom-image--opened {
+      z-index: 999;
+    }
+    .medium-zoom-overlay {
+      backdrop-filter: blur(8px);
+    }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Xóa Watermark Banana AI</h1>
-        <p class="description">Công cụ miễn phí, xử lý hoàn toàn trong trình duyệt bằng thuật toán đảo ngược Alpha blending chính xác toán học. Không dùng AI inpainting – không mất chất lượng, bảo mật 100%.</p>
-
-        <div id="uploadArea">
-            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg">
-            <span class="upload-icon">🖼️</span>
-            <h2>Nhấp hoặc kéo thả ảnh Banana vào đây</h2>
-            <p>Hỗ trợ JPG, PNG, WebP • Xử lý ngay lập tức</p>
-        </div>
-
-        <div id="statusMessage"></div>
-
-        <img id="singlePreview" src="" alt="Ảnh gốc">
-
-        <div id="processedSection">
-            <h2>Kết quả sau khi xóa watermark</h2>
-            <img id="processedImage" src="" alt="Ảnh đã xử lý">
-            <br>
-            <button id="downloadBtn">Tải ảnh xuống</button>
-        </div>
-
-        <footer>
-            <p>Không upload lên server • Chạy cục bộ • Miễn phí vô hạn</p>
-        </footer>
+<body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 text-gray-800 antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen loading">
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-soft">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-1">
+        <svg class="h-10 w-10 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 3-1.9 5.8-5.8 1.9 5.8 1.9 1.9 5.8 1.9-5.8 5.8-1.9-5.8-1.9Z"></path>
+        </svg>
+        <h1 class="text-sm font-bold tracking-tight text-primary md:text-xl">
+          <a href="/" class="hover:text-primary-hover transition-colors" title="Xóa Watermark Banana AI">Banana <span class="text-gray-700 font-medium">Watermark Remover</span></a>
+        </h1>
+      </div>
+      <nav class="flex gap-2 md:gap-6 text-sm font-medium text-gray-600 items-center">
+        <a href="/userscript/Banana-watermark-remover.user.js" target="_blank" class="hidden md:inline-block hover:text-primary transition-colors">Tampermonkey Script</a>
+        <a href="https://allenkuo.medium.com/removing-Banana-ai-watermarks-a-deep-dive-into-reverse-alpha-blending-bbbd83af2a3f" target="_blank" class="hidden md:inline-block hover:text-primary transition-colors">Nguyên lý xóa watermark</a>
+        <a href="https://github.com/journey-ad/Banana-watermark-remover" target="_blank" class="hover:text-primary transition-colors">GitHub</a>
+        <button id="langSwitch" class="px-3 py-1 text-nowrap border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">VI</button>
+      </nav>
     </div>
-
-    <!-- GIỮ NGUYÊN PHẦN NÀY TỪ FILE GỐC CỦA BẠN - ĐÂY LÀ CHÌA KHÓA ĐỂ JS CHẠY -->
-    <script type="module" src="/src/app.js"></script>
-    <!-- Nếu trong file gốc của bạn là src khác (ví dụ /src/app.js), thì thay lại đúng như cũ -->
+  </header>
+  <main class="flex-grow">
+    <section class="relative pt-16 pb-12 lg:pt-24 lg:pb-20 text-center px-4 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-t from-white/50 to-transparent -z-10"></div>
+     
+      <h2 class="bg-clip-text bg-gradient-to-br font-extrabold from-primary via-teal-600 mb-6 md:text-6xl text-4xl text-transparent to-cyan-700 tracking-tighter">
+        Xóa Watermark Banana AI
+      </h2>
+      <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto mb-10">
+        Dựa trên thuật toán đảo ngược Alpha blending chính xác toán học, xử lý hoàn toàn cục bộ trong trình duyệt, miễn phí, siêu nhanh, không mất chất lượng
+      </p>
+      <div class="max-w-4xl mx-auto bg-white/70 backdrop-blur-lg rounded-3xl shadow-glass border border-white/50 p-4 md:p-6">
+        <div id="uploadArea" class="group relative flex flex-col items-center justify-center w-full h-72 border-3 border-dashed border-primary/30 rounded-2xl bg-white/50 hover:bg-white/70 hover:border-primary transition-all duration-300 cursor-pointer">
+          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-md mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M 22.498 20.365 L 22.498 4.247 C 22.498 2.983 21.461 1.946 20.197 1.946 L 4.079 1.946 C 2.815 1.946 1.778 2.983 1.778 4.247 L 1.778 20.365 C 1.778 21.629 2.815 22.666 4.079 22.666 L 20.197 22.666 C 21.461 22.666 22.498 21.629 22.498 20.365 Z M 8.111 14.032 L 10.987 17.483 L 15.014 12.306 L 20.197 19.214 L 4.079 19.214 L 8.111 14.032 Z" fill="currentColor"></path></svg>
+            </div>
+            <p class="mb-2 text-xl font-semibold text-gray-800">Nhấp để chọn hoặc kéo thả ảnh vào đây</p>
+            <p class="text-base text-gray-500">Hỗ trợ JPG, PNG, WebP</p>
+          </div>
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple class="hidden" />
+        </div>
+      </div>
+    </section>
+    <section class="max-w-6xl mx-auto px-4 mb-8 md:mb-20">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 text-center">
+        <div class="step-item relative bg-white/80 backdrop-blur-sm h-20 md:h-28 flex items-center justify-start px-8 md:pl-20 rounded-2xl shadow-soft border border-white/50">
+          <div class="w-10 h-10 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center mr-4 text-lg">1</div>
+          <span class="font-semibold text-gray-800">Chọn ảnh gốc</span>
+        </div>
+        <div class="step-item relative bg-white/80 backdrop-blur-sm h-20 md:h-28 flex items-center justify-start px-8 md:pl-20 rounded-2xl shadow-soft border border-white/50">
+          <div class="w-10 h-10 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center mr-4 text-lg">2</div>
+          <span class="font-semibold text-gray-800">Thuật toán tự động phân tích</span>
+        </div>
+        <div class="step-item relative bg-white/80 backdrop-blur-sm h-20 md:h-28 flex items-center justify-start px-8 md:pl-20 rounded-2xl shadow-soft border border-white/50">
+          <div class="w-10 h-10 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center mr-4 text-lg">3</div>
+          <span class="font-semibold text-gray-800">Lưu ảnh không watermark</span>
+        </div>
+      </div>
+    </section>
+    <section id="singlePreview" class="max-w-7xl mx-auto px-4 pb-24" style="display: none;">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 space-y-8">
+          <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-glass overflow-hidden border border-white/50">
+            <div class="bg-gray-50/80 px-6 py-4 border-b border-gray-200/50 flex justify-between items-center">
+              <h3 class="font-semibold text-gray-700 flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-red-400"></span> Ảnh gốc
+              </h3>
+              <span id="originalInfo" class="text-xs text-gray-400 font-mono"></span>
+            </div>
+            <div class="h-[200px] md:h-[600px] p-6 bg-gradient-to-br from-gray-50 to-gray-100/50">
+              <img id="originalImage" class="max-w-full max-h-full mx-auto rounded-xl shadow-md block" data-zoomable />
+            </div>
+          </div>
+          <div id="processedSection" class="bg-white/80 backdrop-blur-md rounded-3xl shadow-glass overflow-hidden border border-white/50 ring-4 ring-primary/10" style="display: none;">
+            <div class="bg-primary/5 px-6 py-4 border-b border-primary/20 flex justify-between items-center">
+              <h3 class="font-semibold text-primary flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-primary"></span> Kết quả sau xử lý
+              </h3>
+              <span id="processedInfo" class="text-xs text-primary font-mono"></span>
+            </div>
+            <div class="h-[200px] md:h-[600px] p-6 bg-gradient-to-br from-emerald-50 to-teal-50/50">
+              <img id="processedImage" class="max-w-full max-h-full mx-auto rounded-xl shadow-md block" data-zoomable />
+            </div>
+          </div>
+        </div>
+        <div class="w-full lg:w-96 flex-shrink-0">
+          <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-glass border border-white/50 p-8 sticky top-24">
+            <h4 class="text-xl font-bold text-gray-900 mb-8">Bảng điều khiển</h4>
+            <div class="space-y-4">
+              <button id="downloadBtn" class="w-full py-4 px-6 bg-primary hover:bg-primary-hover text-white rounded-2xl font-semibold transition-all flex items-center justify-center gap-3 shadow-md" style="display: none;">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Tải kết quả xuống
+              </button>
+              <button id="resetBtn" class="w-full py-4 px-6 bg-white border-2 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-primary hover:text-primary rounded-2xl font-semibold transition-all flex items-center justify-center gap-3 shadow-sm">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8 003 0 01-15.357-2m15.357 2H15"></path></svg>
+                Đặt lại / Thay ảnh mới
+              </button>
+            </div>
+            <div id="statusMessage" class="mt-8 text-base text-gray-600 min-h-[2rem] font-medium"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="multiPreview" class="max-w-7xl mx-auto px-4 pb-24 scroll-mt-24" style="display: none;">
+      <div class="mb-6 flex justify-between items-center">
+        <h3 class="text-xl font-bold text-gray-900">
+          <span id="progressText">Tiến độ xử lý: 0/0</span>
+        </h3>
+        <button id="downloadAllBtn" class="py-3 px-8 bg-primary hover:bg-primary-hover text-white rounded-2xl font-semibold transition-all flex items-center gap-3 shadow-md" style="display: none;">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          Tải tất cả
+        </button>
+      </div>
+      <div id="imageList" class="space-y-6"></div>
+    </section>
+    <section class="bg-white/60 backdrop-blur-md py-20 border-t border-gray-200/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-gray-900">Đặc điểm nổi bật</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white/70 backdrop-blur-sm p-8 rounded-3xl shadow-glass hover:shadow-2xl transition-shadow border border-white/50">
+            <div class="w-16 h-16 bg-emerald-100 text-primary rounded-2xl flex items-center justify-center mb-6">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </div>
+            <h4 class="text-xl font-bold text-gray-900 mb-3">Xử lý siêu nhanh</h4>
+            <p class="text-gray-600 leading-relaxed">Dựa trên công nghệ trình duyệt hiện đại, phản hồi chỉ trong vài mili giây, không cần chờ đợi</p>
+          </div>
+          <div class="bg-white/70 backdrop-blur-sm p-8 rounded-3xl shadow-glass hover:shadow-2xl transition-shadow border border-white/50">
+            <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            <h4 class="text-xl font-bold text-gray-900 mb-3">Bảo mật tuyệt đối</h4>
+            <p class="text-gray-600 leading-relaxed">Hoàn toàn chạy phía client, ảnh không rời khỏi máy bạn, không upload lên server</p>
+          </div>
+          <div class="bg-white/70 backdrop-blur-sm p-8 rounded-3xl shadow-glass hover:shadow-2xl transition-shadow border border-white/50">
+            <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z M6 6l12 12"></path>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold text-gray-900 mb-3">Hoàn toàn miễn phí</h4>
+            <p class="text-gray-600 leading-relaxed">Không giới hạn lượt dùng, không phí ẩn, dùng thoải mái</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-gradient-to-r from-primary to-primary-hover text-white py-10 md:pt-16 md:pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div class="col-span-1 md:col-span-2">
+          <h5 class="text-3xl font-bold mb-4">Banana Watermark Remover</h5>
+          <p class="text-emerald-100 max-w-md">
+            Công cụ xóa watermark Banana không tổn hao chất lượng, chỉ dùng để học tập và trao đổi
+          </p>
+        </div>
+        <div>
+          <h6 class="font-bold mb-4 text-emerald-100">Liên kết</h6>
+          <ul class="space-y-2 text-emerald-50">
+            <li><a href="/terms.html" class="hover:text-white">Điều khoản sử dụng</a></li>
+            <li><a href="https://github.com/journey-ad/Banana-watermark-remover" target="_blank" class="hover:text-white">Github</a></li>
+            <li><a href="/userscript/Banana-watermark-remover.user.js" target="_blank" class="hover:text-white">Tampermonkey Script</a></li>
+          </ul>
+        </div>
+        <div>
+          <h6 class="font-bold mb-4 text-emerald-100">Công nghệ</h6>
+          <ul class="space-y-2 text-emerald-50">
+            <li><a href="https://allenkuo.medium.com/removing-Banana-ai-watermarks-a-deep-dive-into-reverse-alpha-blending-bbbd83af2a3f" target="_blank" class="hover:text-white">Nguyên lý xóa watermark</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-emerald-400/50 pt-8 text-center text-emerald-200">
+        <p>&copy; 2025 Banana Watermark Remover. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <div id="loadingOverlay" class="fixed inset-0 bg-white/90 backdrop-blur-lg z-[60] hidden flex items-center justify-center">
+    <div class="flex flex-col items-center">
+      <div class="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent mb-6"></div>
+      <p class="text-xl text-gray-700 font-semibold">Đang xử lý ảnh...</p>
+    </div>
+  </div>
+  <script src="app.js"></script>
 </body>
 </html>
