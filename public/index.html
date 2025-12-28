@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xóa Watermark Banana AI</title>
+    <meta name="description" content="Công cụ miễn phí xóa watermark Banana AI, an toàn, riêng tư, 100% chạy trong trình duyệt.">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -20,29 +21,6 @@
             justify-content: center;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            font-weight: 700;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin: 1.5rem 0 1rem;
-            font-weight: 600;
-        }
-
-        p {
-            opacity: 0.9;
-            max-width: 600px;
-            line-height: 1.6;
-        }
-
         .container {
             max-width: 900px;
             width: 90%;
@@ -51,18 +29,31 @@
             border-radius: 20px;
             padding: 2.5rem;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        p.description {
+            opacity: 0.9;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
         }
 
         #uploadArea {
             border: 3px dashed rgba(255, 255, 255, 0.5);
             border-radius: 16px;
-            padding: 3rem 2rem;
-            text-align: center;
+            padding: 4rem 2rem;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             background: rgba(255, 255, 255, 0.05);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         #uploadArea:hover {
@@ -71,137 +62,96 @@
             transform: translateY(-5px);
         }
 
+        #uploadArea.dragover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
         #fileInput {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             opacity: 0;
             cursor: pointer;
         }
 
         .upload-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            display: block;
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .steps {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-
-        .step {
-            text-align: center;
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0 auto 1rem;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-        }
-
-        .feature {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .feature h3 {
-            margin-top: 0;
-            font-size: 1.3rem;
+        #uploadArea h2 {
+            font-size: 1.8rem;
+            margin: 0.5rem 0;
         }
 
         #singlePreview {
             max-width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             margin: 2rem 0;
+            display: none;
         }
 
         #processedSection {
             display: none;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
         #processedImage {
             max-width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         #downloadBtn {
             display: none;
-            margin-top: 1.5rem;
-            padding: 1rem 2.5rem;
+            margin-top: 2rem;
+            padding: 1rem 3rem;
             background: #ffffff;
             color: #667eea;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         #downloadBtn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
         #statusMessage {
-            text-align: center;
-            margin: 1rem 0;
-            font-size: 1.2rem;
-            min-height: 1.5em;
+            font-size: 1.3rem;
+            margin: 1.5rem 0;
+            min-height: 2rem;
         }
 
         footer {
-            margin-top: 3rem;
-            text-align: center;
+            margin-top: 4rem;
             opacity: 0.8;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Xóa Watermark Banana AI</h1>
-            <p>Dựa trên thuật toán đảo ngược Alpha blending, xử lý hoàn toàn cục bộ trong trình duyệt, miễn phí, nhanh chóng, không mất chất lượng</p>
-        </header>
+        <h1>Xóa Watermark Banana AI</h1>
+        <p class="description">Công cụ miễn phí, nhanh chóng, xử lý hoàn toàn trong trình duyệt. Dựa trên thuật toán đảo ngược Alpha blending chính xác toán học – không dùng AI inpainting, không mất chất lượng.</p>
 
         <div id="uploadArea">
-            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp">
-            <span class="upload-icon">📁</span>
-            <h2>Nhấp để chọn hoặc kéo thả ảnh vào đây</h2>
-            <p>Hỗ trợ JPG, PNG, WebP</p>
+            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg">
+            <span class="upload-icon">🖼️</span>
+            <h2>Nhấp hoặc kéo thả ảnh Banana vào đây</h2>
+            <p>Hỗ trợ JPG, PNG, WebP • Xử lý ngay lập tức, bảo mật 100%</p>
         </div>
 
         <div id="statusMessage"></div>
 
-        <img id="singlePreview" src="" alt="Ảnh gốc" style="display:none;">
+        <img id="singlePreview" src="" alt="Ảnh gốc">
 
         <div id="processedSection">
             <h2>Kết quả sau khi xóa watermark</h2>
@@ -210,42 +160,12 @@
             <button id="downloadBtn">Tải ảnh xuống</button>
         </div>
 
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <p>Chọn ảnh gốc</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <p>Thuật toán tự động phân tích</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <p>Lưu ảnh không watermark</p>
-            </div>
-        </div>
-
-        <div class="features">
-            <div class="feature">
-                <h3>⚡ Xử lý siêu nhanh</h3>
-                <p>Dựa trên công nghệ trình duyệt hiện đại, phản hồi chỉ trong vài mili giây, không cần chờ đợi</p>
-            </div>
-            <div class="feature">
-                <h3>🔒 Bảo mật tuyệt đối</h3>
-                <p>Hoàn toàn chạy phía client, ảnh không rời khỏi máy bạn, không upload lên server</p>
-            </div>
-            <div class="feature">
-                <h3>🆓 Miễn phí hoàn toàn</h3>
-                <p>Không giới hạn lượt dùng, không phí ẩn, dùng ngay lập tức</p>
-            </div>
-        </div>
-
         <footer>
-            <p>Đang xử lý...</p>
+            <p>Không upload ảnh lên server • Chạy hoàn toàn cục bộ • Miễn phí vô hạn</p>
         </footer>
     </div>
-<scrip src="app.js"></scrip>
-    <!-- Không thay đổi phần script gốc (giả sử có file script riêng hoặc inline gốc) -->
-    <!-- Nếu code gốc có JS inline, hãy giữ nguyên ở đây. Ở đây tôi giữ cấu trúc HTML thuần để tương thích logic JS cũ. -->
+
+    <!-- Giữ nguyên dòng này để logic JS gốc hoạt động -->
+    <script src="app.js"></script>
 </body>
 </html>
