@@ -140,13 +140,13 @@
 <body>
     <div class="container">
         <h1>Xóa Watermark Banana AI</h1>
-        <p class="description">Công cụ miễn phí, nhanh chóng, xử lý hoàn toàn trong trình duyệt. Dựa trên thuật toán đảo ngược Alpha blending chính xác toán học – không dùng AI inpainting, không mất chất lượng.</p>
+        <p class="description">Công cụ miễn phí, xử lý hoàn toàn trong trình duyệt bằng thuật toán đảo ngược Alpha blending chính xác toán học. Không dùng AI inpainting – không mất chất lượng, bảo mật 100%.</p>
 
         <div id="uploadArea">
             <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg">
             <span class="upload-icon">🖼️</span>
             <h2>Nhấp hoặc kéo thả ảnh Banana vào đây</h2>
-            <p>Hỗ trợ JPG, PNG, WebP • Xử lý ngay lập tức, bảo mật 100%</p>
+            <p>Hỗ trợ JPG, PNG, WebP • Xử lý ngay lập tức</p>
         </div>
 
         <div id="statusMessage"></div>
@@ -161,11 +161,12 @@
         </div>
 
         <footer>
-            <p>Không upload ảnh lên server • Chạy hoàn toàn cục bộ • Miễn phí vô hạn</p>
+            <p>Không upload lên server • Chạy cục bộ • Miễn phí vô hạn</p>
         </footer>
     </div>
 
-    <!-- Giữ nguyên dòng này để logic JS gốc hoạt động -->
-    <script src="app.js"></script>
+    <!-- GIỮ NGUYÊN PHẦN NÀY TỪ FILE GỐC CỦA BẠN - ĐÂY LÀ CHÌA KHÓA ĐỂ JS CHẠY -->
+    <script type="module" src="/src/app.js"></script>
+    <!-- Nếu trong file gốc của bạn là src khác (ví dụ /src/app.js), thì thay lại đúng như cũ -->
 </body>
 </html>
